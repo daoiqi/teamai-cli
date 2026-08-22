@@ -208,6 +208,13 @@ export const TeamaiConfigSchema = z.object({
     codebuddy: { skills: '.codebuddy/skills', rules: '.codebuddy/rules', settings: '.codebuddy/settings.json', claudemd: '.codebuddy/CODEBUDDY.md', agents: '.codebuddy/agents', mcp: '.codebuddy/mcp.json', mcpProject: '.codebuddy/mcp.json' },
     openclaw: { skills: '.openclaw/skills', rules: '.openclaw/rules', claudemd: '.openclaw/workspace/AGENTS.md' },
     hermes: { skills: '.hermes/skills', claudemd: 'AGENTS.md' },
+    // DeepSeek Harness (`dsh`) reads project skills from <root>/.dsh/skills and
+    // user skills from ~/.dsh/skills (same relative tail, so no userScope override
+    // is needed — unlike OpenCode's ~/.config/opencode prefix). Instructions come
+    // from the project-root AGENTS.md, the same file hermes/workbuddy already write.
+    // Subagents (cordis presets) and MCP (cordis YAML rows) are not Claude-compatible
+    // and are intentionally omitted this phase.
+    deepseek: { skills: '.dsh/skills', claudemd: 'AGENTS.md' },
     workbuddy: { skills: '.workbuddy/skills', rules: '.workbuddy/rules', settings: '.workbuddy/settings.json', claudemd: 'AGENTS.md', mcp: '.workbuddy/mcp.json', mcpProject: '.workbuddy/mcp.json' },
     // OpenCode reads project config from <root>/.opencode/ but user config from
     // ~/.config/opencode/ — a different prefix, hence userScope. Skills are also

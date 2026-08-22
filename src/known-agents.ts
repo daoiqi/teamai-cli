@@ -76,6 +76,7 @@ export const KNOWN_AGENTS: KnownAgent[] = [
   { id: 'tcodex', displayName: 'TCodex', category: 'coding', skillsPath: '.tcodex/skills' },
   { id: 'cursor', displayName: 'Cursor', category: 'coding', skillsPath: '.cursor/skills' },
   { id: 'codebuddy', displayName: 'CodeBuddy', category: 'coding', skillsPath: '.codebuddy/skills' },
+  { id: 'deepseek', displayName: 'DeepSeek Harness', category: 'coding', skillsPath: '.dsh/skills' },
 
   // Additional coding agents from skills-manage
   { id: 'gemini', displayName: 'Gemini CLI', category: 'coding', skillsPath: '.gemini/skills' },
