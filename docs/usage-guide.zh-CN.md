@@ -942,6 +942,14 @@ team-repo/
 - **Rules** 会被复制到 `.opencode/rules/`（或 `~/.config/opencode/rules/`），但 OpenCode 不会自动扫描 rules 目录——文件在被引用前是惰性的。因此 teamai 会往 `opencode.json` 的 `instructions` 数组里加一条 `rules/*.md` glob，并在团队最后一条 rule 消失时再把它移除，且只编辑这一个键、不动你自己的 `instructions` 条目。
 - **MCP** server 位于共享 `opencode.json` 的 `mcp` 键下（详见上文 MCP 章节）。
 
+### DeepSeek Harness
+
+[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）已支持 skills 与 instructions 的同步：
+
+- **Skills** 落在 `.dsh/skills/`（项目）或 `~/.dsh/skills/`（用户）——`dsh` 原生读取这两个根目录，且它的 skill 格式（带 `name` + `description` frontmatter 的 `SKILL.md`）与 Claude 完全一致，因此文件原样拷贝、无需转换。
+- **Instructions** 会注入到项目根的 `AGENTS.md`，正是 `dsh` 启动时加载的文件（其候选列表为 `AGENTS.md`、`CLAUDE.md`）。这走的是共享的 `claudemd` 机制，与 hermes/workbuddy 一致。
+- **Subagents** 与 **MCP** **不**同步：`dsh` 用 Cordis preset（`agent.cordis.yml`）组合 agent、用 Cordis 配置行配置 MCP，二者都无法映射到 Claude 的 Markdown-agent 或 `mcpServers` JSON 格式。
+
 ### 其他
 
 ```bash

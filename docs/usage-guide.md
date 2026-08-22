@@ -947,6 +947,14 @@ team-repo/
 - **Rules** are copied into `.opencode/rules/` (or `~/.config/opencode/rules/`), but OpenCode does not auto-scan a rules directory — the files are inert until referenced. teamai therefore adds a `rules/*.md` glob to the `instructions` array in `opencode.json` and removes it again when the team's last rule goes away, editing only that one key and leaving your own `instructions` entries untouched.
 - **MCP** servers live under the `mcp` key of the shared `opencode.json` (see the MCP section above).
 
+### DeepSeek Harness
+
+[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (`dsh`) is supported for skills and instructions:
+
+- **Skills** land in `.dsh/skills/` (project) or `~/.dsh/skills/` (user) — `dsh` reads both roots natively, and its skill format (a `SKILL.md` with `name` + `description` frontmatter) is identical to Claude's, so files are copied as-is with no conversion.
+- **Instructions** are injected into the project-root `AGENTS.md`, the same file `dsh` loads at startup (its candidate list is `AGENTS.md`, `CLAUDE.md`). This is the shared `claudemd` mechanism, unchanged from hermes/workbuddy.
+- **Subagents** and **MCP** are **not** synced: `dsh` composes agents from Cordis presets (`agent.cordis.yml`) and configures MCP through Cordis config rows, neither of which maps to Claude's Markdown-agent or `mcpServers` JSON formats.
+
 ### Miscellaneous
 
 ```bash

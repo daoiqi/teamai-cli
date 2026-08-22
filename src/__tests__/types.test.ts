@@ -106,6 +106,21 @@ describe('TeamaiConfigSchema', () => {
     });
   });
 
+  it('should include deepseek (DeepSeek Harness) in default toolPaths with skills + AGENTS.md only', () => {
+    const result = TeamaiConfigSchema.parse({
+      team: 'test-team',
+      repo: 'https://git.woa.com/test/repo.git',
+    });
+    expect(result.toolPaths).toHaveProperty('deepseek');
+    // dsh reads project skills from .dsh/skills and instructions from the
+    // project-root AGENTS.md. Subagents (cordis presets) and MCP (cordis rows)
+    // are intentionally omitted, so those fields must stay absent.
+    expect(result.toolPaths.deepseek).toEqual({
+      skills: '.dsh/skills',
+      claudemd: 'AGENTS.md',
+    });
+  });
+
 });
 
 describe('TeamaiConfigSchema reviewers', () => {
